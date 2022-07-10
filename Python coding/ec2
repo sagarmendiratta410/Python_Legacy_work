@@ -1,0 +1,13 @@
+# Importing boto3 library to make functionality available
+import boto3
+# Creating the connection with the resource of AWS EC2 service
+
+ec2 = boto3.client('ec2')
+response = ec2.describe_instance_attribute(
+    Attribute='instanceType',
+    DryRun=False,
+    InstanceId='i-0b48ee40d76243241'
+)
+myinstance = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['Ubuntu-AutomateInfra']}])
+
+print(myinstance['Reservations']['Instances']['InstanceId'])
